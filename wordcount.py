@@ -25,10 +25,9 @@ should return a dictionary with words as keys, and their counts as values.
 
 # Your name, plus anyone who helped you with this assignment
 # Give credit where credit is due.
-__author__ = "Lori Henderson"
-__author__ = "Mavrick Watts" #helped me retrieve the launch.json file and also made me realize that I needed to use --topcount if I wanted the top 20 words to appear instead of every word
+__author__ = "Lori Henderson and Mavrick Watts" #helped me retrieve the launch.json file and also made me realize that I needed to use --topcount if I wanted the top 20 words to appear instead of every word
 
-import sys            
+import sys
 
 def create_word_dict(filename):
     """Returns a word/count dict for the given file."""
@@ -40,8 +39,7 @@ def create_word_dict(filename):
                     word_dict[word] += 1
                 else:
                     word_dict[word] = 1
-    return word_dict 
-     
+    return word_dict
 
 
 def print_words(filename):
@@ -56,17 +54,17 @@ def print_words(filename):
 
 def print_top(filename):
     """Prints the top count listing for the given file."""
-    new_dict = print_words(filename)
-    dict_items = new_dict.items()
-    sorted_items = sorted(dict_items, key=lambda x: x[1], reverse=True)
-    for word in sorted_items[:20]:
-        print(str(word[0]) + " : " + str(word[1]))
-    
+    new_dict = create_word_dict(filename)
+    top_twenty = sorted(new_dict, key=lambda item: -new_dict[item])[:20]
+    for each in top_twenty:
+        print(each + ": " + str(new_dict[each]))
+    return top_twenty
 
 
 # This basic command line argument parsing code is provided and calls
 # the print_words() and print_top() functions which you must implement.
 def main(args):
+    """"""
     if len(args) != 2:
         print('usage: python wordcount.py {--count | --topcount} file')
         sys.exit(1)
